@@ -14,7 +14,7 @@ Vue.use(Vant);
 Vue.config.productionTip = false;
 
 Vue.prototype.$axios = axios.create({
-  baseURL: 'https://xcvtu.cn/',//测试地址
+  baseURL: 'baidu.com',//测试地址
   transformResponse:[function(data) {
     return data;
   }],
