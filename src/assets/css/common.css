@@ -1,0 +1,444 @@
+@charset "UTF-8";
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  /*font-size: 100%*/
+  vertical-align: baseline;
+  background: transparent;
+  -webkit-user-select: none;
+  /*禁用手机浏览器的用户选择功能 */
+  -moz-user-select: none;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+select {
+  border: solid 1px #000;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  padding-right: 14px;
+}
+
+input,
+button,
+textarea {
+  outline: none;
+  border: none;
+}
+
+html,
+body {
+  /* background: #f5f5f5 !important; */
+  min-height: 100%;
+  /*min-height: 100%;
+     */
+}
+
+.head {
+  position: relative;
+}
+
+input::-webkit-input-placeholder {
+  color: #999;
+}
+
+input::-moz-placeholder {
+  color: #999;
+}
+
+input:-ms-input-placeholder {
+  color: #999;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  outline: none;
+}
+
+html,
+body {
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  line-height: 1;
+  font-family: "微软雅黑", PingFangSC-Light, PingFangSC-Regular, serif;
+  font-size: 12px;
+  color: #535353;
+  /* background: #f3f3f3; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+button {
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+em {
+  font-style: normal;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+ins {
+  background-color: #cccccc;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+mark {
+  background-color: #ff9;
+  color: #252839;
+  font-style: italic;
+  font-weight: bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title],
+dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* change border colour to suit your needs */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input,
+select {
+  vertical-align: middle;
+  font: inherit;
+}
+
+html {
+  font-variant-numeric: oldstyle-nums;
+  -webkit-font-feature-settings: "liga", "kern", "onum";
+  -moz-font-feature-settings: "liga", "kern", "onum";
+  font-feature-settings: "liga", "kern", "onum";
+}
+
+*,
+:after,
+:before {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+embed,
+iframe,
+img,
+object,
+video {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+i {
+  font-style: normal;
+}
+
+img{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width:100%;
+  height: auto;
+  border: 0;
+  display: block;
+}
+
+/* 遮罩层 */
+.Mask-box{
+  background: rgba(0,0,0,0.7);
+  width: 100%;
+  z-index: 1000;
+  position: fixed;
+  height: 100%;
+  top: 0;
+}
+
+.y-Middle {
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+/* 字体垂直居中 */
+.text-align{
+  display: inline;
+  vertical-align: middle;
+}
+
+/* 垂直居中 */
+.position-center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+}
+
+@media screen and (max-width: 340px) {
+  html {
+    font-size: 84px;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 360px) {
+  html {
+    font-size: 89.25px;
+  }
+}
+
+@media screen and (min-width: 361px) and (max-width: 400px) {
+  html {
+    font-size: 100px;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 440px) {
+  html {
+    font-size: 110.25px;
+  }
+}
+
+@media screen and (min-width: 441px) and (max-width: 480px) {
+  html {
+    font-size: 120.75px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 520px) {
+  html {
+    font-size: 131.25x;
+  }
+}
+
+@media screen and (min-width: 521px) and (max-width: 560px) {
+  html {
+    font-size: 141.75px;
+  }
+}
+
+@media screen and (min-width: 561px) and (max-width: 600px) {
+  html {
+    font-size: 152.25px;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 640px) {
+  html {
+    font-size: 162.75px;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 680px) {
+  html {
+    font-size: 173.25px;
+  }
+}
+
+@media screen and (min-width: 681px) and (max-width: 720px) {
+  html {
+    font-size: 183.75px;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 760px) {
+  html {
+    font-size: 194.25px;
+  }
+}
+
+@media screen and (min-width: 761px) and (max-width: 800px) {
+  html {
+    font-size: 204.75px;
+  }
+}
+
+@media screen and (min-width: 816px) {
+  html {
+    font-size: 214.2px;
+  }
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfloat:after {
+  display: block;
+  clear: both;
+  height: 0;
+  content: "";
+  visibility: hidden;
+  overflow: hidden;
+}
