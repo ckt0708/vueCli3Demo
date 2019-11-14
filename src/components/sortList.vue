@@ -1,5 +1,6 @@
 <template>
     <div class="list">
+        <h1>可上下移动排序列表</h1>
         <ul>
             <li v-for="(item,index) in tableData" :key="index" @click="isSelectLi(index,item.isSelect)" :class="item.isSelect ? 'active' : '' ">
                 <span @click="sortUp(index,item)">{{item.name}}上移{{index}}</span>
