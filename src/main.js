@@ -3,18 +3,22 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import Vant from 'vant';
-import 'vant/lib/index.css';
+// import Vant from 'vant';
+// import 'vant/lib/index.css';
 
 // 引入公共样式
 require("./assets/css/common.css");
 
-Vue.use(Vant);
+// 引入amfe-flexible 10px = 10/37.5 rem
+import 'amfe-flexible/index.js'
+
+// 全局引入
+// Vue.use(Vant);
 
 Vue.config.productionTip = false;
 
 Vue.prototype.$axios = axios.create({
-  baseURL: 'baidu.com',//测试地址
+  baseURL: 'https://xcvtu.cn/',//测试地址
   transformResponse:[function(data) {
     return data;
   }],

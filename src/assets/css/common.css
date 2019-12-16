@@ -336,7 +336,7 @@ img{
   -webkit-transform: translateX(-50%) translateY(-50%);
 }
 
-@media screen and (max-width: 340px) {
+/* @media screen and (max-width: 340px) {
   html {
     font-size: 84px;
   }
@@ -418,7 +418,7 @@ img{
   html {
     font-size: 214.2px;
   }
-}
+} */
 
 .clearfix {
   *zoom: 1;

@@ -1,14 +1,24 @@
 <template>
-    <div class="list">
-        <h1>可上下移动排序列表</h1>
-        <ul>
-            <li v-for="(item,index) in tableData" :key="index" @click="isSelectLi(index,item.isSelect)" :class="item.isSelect ? 'active' : '' ">
-                <span @click="sortUp(index,item)">{{item.name}}上移{{index}}</span>
-                <span @click="sortDown(index,item)">下移</span>
-                <span>删除</span>
-                <span>编辑</span>
-            </li>
-        </ul>
+    <div class="main">
+        <div class="header flex v-c">
+            <a href="javascript:history.go(-1);" class="flex v-c">
+                <img src="../assets/images/back.png" alt="">
+                <span>返回</span>
+            </a>
+        </div>
+    
+        <div class="list">
+            <h1>可上下移动排序列表</h1>
+            <ul>
+                <li v-for="(item,index) in tableData" :key="index" @click="isSelectLi(index,item.isSelect)" :class="item.isSelect ? 'active' : '' ">
+                    <span @click="sortUp(index,item)">{{item.name}}上移{{index}}</span>
+                    <span @click="sortDown(index,item)">下移</span>
+                    <span>删除</span>
+                    <span>编辑</span>
+                    <span :class="(item.name ? 'active'+ item.id : '' )"></span>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -88,6 +98,36 @@ export default {
 </script>
 
 <style scoped>
+.flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flex.v-c {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+/* top-back */
+.header{
+    font-size:17px;
+    height: 50px;
+}
+
+.header a{
+    font-size: 16px;
+    color: #000;
+}
+
+.header img{
+    width: 9px;
+    height: 14px;
+    margin: 0 11px 0 8px;
+}
+/* top-back END */
+
 .list{
     font-size: 0.15rem;
     color: #000;

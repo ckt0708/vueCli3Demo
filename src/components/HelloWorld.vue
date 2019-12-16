@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}{{hello}}</h1>
+
+    <router-link :to='{name:"about",query:{msg:"测试数据"}}'>去About页面</router-link>
+    
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
