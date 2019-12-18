@@ -6,6 +6,7 @@
         <div>总价：¥{{price*quantity}}</div>
         <div>折扣后：¥{{totlePriceWithTax}}</div>
         <p class="click" @click="add()">点我有惊喜哦</p>
+        <p class="click" @click="clickMe()">获取用户信息</p>
     </div>
 </template>
 
@@ -61,15 +62,15 @@
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
                         console.log("我发起请求了")
-                        // this.$axios.post('/api/user/info', {
-                        //     token: this.token
-                        // })
-                        // .then((res) => {
-                        //     let {
-                        //         name
-                        //     } = res.data.data;
-                        //     console.log("name", name)
-                        // })
+                        this.$axios.post('/api/user/info', {
+                            token: this.token
+                        })
+                        .then((res) => {
+                            let {
+                                name
+                            } = res.data.data;
+                            console.log("name", name)
+                        })
                     }, 2000)
                 })
             },
