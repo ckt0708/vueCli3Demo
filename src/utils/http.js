@@ -1,64 +1,39 @@
 /* 
-
 封装axios
-使用方法：
-
-http.get('/api/url',{uid:1}).then((res)=>{
-
-})
-
 */
 
-import Vue from 'vue'
-import { Toast } from 'vant'
 import axios from "axios"
+import { Toast } from 'vant'
+// qs 是对 post 请求 data 进行处理，不然后台接收不了数据
+// 因为axios post请求默认Content-type是 application/json
+import qs from 'qs'
 
-const service = axios.create({
-    baseURL: 'http://7788xhp.com',//测试地址
-    transformResponse:[function(data) {
-        return data;
-    }],
-    timeout: 20000,
-    responseType: 'json', // default
-})
 
-// request拦截器 request interceptor
-service.interceptors.request.use(
-    config => {
-        console.log("request")
-        // 不传递默认开启loading
-        // if (!config.hideloading) {
-        //     // loading
-        //     Toast.loading({
-        //         forbidClick: true
-        //     })
-        // }
-        // if (store.getters.token) {
-        //     config.headers['X-Token'] = ''
-        // }
-        return config
+axios.defaults.timeout = 5000 // 5s没响应则认为该请求失败
+axios.defaults.baseURL = 'http://7788xhp.com'
+// axios.defaults.withCredentials = true	// 跨域时如果要带上cookie话则需要设置withCrendentials
+
+// http request 拦截器 所有请求发出前都需要执行以下代码
+axios.interceptors.request.use(
+    request => {
+        // console.log("request",request)
+        request.data = qs.stringify(request.data) //这里就用qs对data就行处理
+        request.headers = {
+          'Content-Type': 'application/x-www-form-urlencoded' //设置header覆盖content-type
+        }
+        Toast.loading({
+            forbidClick: true
+        })
+        return request
     },
     error => {
-        // do something with request error
-        console.log(error) // for debug
         return Promise.reject(error)
     }
 )
 
-// service.interceptors.request.use(function (response) {
-//         // Do something before request is sent
-//         console.log("request")
-//         return response;
-//     }, function (error) {
-//         // Do something with request error
-//         return Promise.reject(error);
-//     }
-// );
-
 // respone拦截器
-service.interceptors.response.use(
+axios.interceptors.response.use(
     response => {
-        console.log("response")
         Toast.clear()
         const res = response.data
         if (res.status && res.status !== 200) {
@@ -75,74 +50,62 @@ service.interceptors.response.use(
     },
     error => {
         Toast.clear()
-        console.log('err' + error) // for debug
+        console.log('err' + error)
         return Promise.reject(error)
     }
 )
 
-// export default service
-
-export default{
-    service,
-    /**
-     * get方法，对应get请求
-     * @param {String} url [请求的url地址]
-     * @param {Object} params [请求时携带的参数]
-     */
-    get (url, params) {
-        return new Promise((resolve, reject) => {
-            axios.get(url, {
-                params: params
-            }).then(res => {
-                resolve(res.data)
-            }).catch(err => {
-                reject(err)
+/**
+ *  封装get方法 跟 post 方法
+ *  @param url
+ *  @param params
+ *  @returns {Promise}
+ */
+ 
+// 这种写法是导出后可以通过在main.js中使用Vue.use(http) 挂载到vue实例上
+export default {
+    install: (Vue) => {
+        Vue.prototype.$get = (url, params = {}) => {
+            return new Promise((resolve, reject) => {
+                axios.get(url, {params})
+                .then(response => resolve(response.data))
+                .catch(error => reject(error))
             })
-        })
-    },
-    /**
-     * post方法，对应post请求
-     * @param {String} url [请求的url地址]
-     * @param {Object} params [请求时携带的参数]
-     */
-    post (url, params) {
-        return new Promise((resolve, reject) => {
-            axios.post(url, params)
-            .then(res => {
-                resolve(res.data)
+        }
+        Vue.prototype.$post = (url, params = {}) => {
+            return new Promise((resolve, reject) => {
+                axios.post(url, params)
+                .then(response => resolve(response.data))
+                .catch(error => reject(error))
             })
-            .catch(err => {
-                reject(err)
+        }
+        /**
+         * postFormData方法，对应post请求，用来提交文件+数据
+         * @param {String} url [请求的url地址]
+         * @param {Object} params [请求时携带的参数]
+         */
+        Vue.prototype.postFormData = (url, params = {}) =>{
+            return new Promise((resolve, reject) => {
+                axios({
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    transformRequest: [function (data) { // 在请求之前对data传参进行格式转换
+                        const formData = new FormData()
+                        Object.keys(data).forEach(key => {
+                            formData.append(key, data[key])
+                        })
+                        return formData
+                    }],
+                    url,
+                    method: 'post',
+                    data: params
+                }).then(res => {
+                    resolve(res.data)
+                }).catch(err => {
+                    reject(err)
+                })
             })
-        })
-    },
-    /**
-     * postFormData方法，对应post请求，用来提交文件+数据
-     * @param {String} url [请求的url地址]
-     * @param {Object} params [请求时携带的参数]
-     */
-    postFormData (url, params) {
-        return new Promise((resolve, reject) => {
-            axios({
-                headers: {
-                    'Content-Type': 'multipart/form-data'// ;boundary=----WebKitFormBoundaryQ6d2Qh69dv9wad2u
-                },
-                transformRequest: [function (data) { // 在请求之前对data传参进行格式转换
-                    const formData = new FormData()
-                    Object.keys(data).forEach(key => {
-                        formData.append(key, data[key])
-                    })
-                    return formData
-                }],
-                url,
-                method: 'post',
-                data: params
-            }).then(res => {
-                resolve(res.data)
-            }).catch(err => {
-                reject(err)
-            })
-        })
-    },
-
+        }
+    }
 }

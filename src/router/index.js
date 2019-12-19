@@ -9,10 +9,23 @@ import User from "../views/User.vue"
 
 Vue.use(VueRouter)
 
+/**
+ *  => 按需加载 
+ *  component: (resolve) => {
+        require(['../views/User.vue'], resolve)
+    },
+ *  @param {boolean} keepAlive [是否缓存页面]
+ *  @param {boolean} requireAuth [ 是否需要登录才能进入的页面]
+ */
+
 const routes = [{
         path: '/',
         name: 'home',
-        component: Home
+        component: Home,
+        meta: {
+            keepAlive: true,
+            requireAuth: true
+        },
     },
     {
         path: '/login',
@@ -26,25 +39,13 @@ const routes = [{
         meta: {
             requireAuth: true
         },
-        // 拦截是否登录
-        // beforeEnter:(to,from,next) => {
-        //   if(authApi.isAuthenticated() === false){
-        //     next("/login")
-        //   }else{
-        //     next();
-        //   }
-        // }
     },
     {
         path: '/user',
         name: 'user',
-        /*
-         * 按需加载 
-         */
         component: (resolve) => {
             require(['../views/User.vue'], resolve)
         },
-        // 需要登录才能进入的页面可以增加一个meta属性
         meta: {
             requireAuth: true
         },
