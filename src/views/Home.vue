@@ -13,10 +13,8 @@
 <script>
     // @ is an alias to /src
     import HelloWorld from '@/components/HelloWorld.vue'
-    import {
-        setTimeout
-    } from 'timers';
-    
+    import { constants } from 'fs';
+
     export default {
         name: 'home',
         components: {
@@ -25,70 +23,57 @@
         data() {
             return {
                 token:JSON.parse(localStorage.getItem('userMsg')).token,
-                price:5.00,//单价
-    	        quantity:2//数量
+                price:5.00, //单价
+                quantity:2, //数量
+                list:[
+                    {
+                        id:1,
+                        name:"小明",
+                        age:20,
+                        sex:"男"
+                    },
+                    {
+                        id:2,
+                        name:"小明2",
+                        age:21,
+                        sex:"男"
+                    },
+                    {
+                        id:3,
+                        name:"小明3",
+                        age:22,
+                        sex:"男"
+                    },
+                ],
             }
         },
         created() {
-            console.log("$route",this.$route)
-            async function hello(flag) {
-                if (flag) {
-                    return 'hello world';
-                } else {
-                    throw 'happen Error';
-                }
-            }
-            // console.log(hello(0));
-            // console.log(hello(1));
-            // hello(0).catch(err=>{
-            //   console.log(err);
-            // })
+
         },
         methods: {
-            // clickMe(){
-            //   console.log("你点到我了")
-            // },
-            cli() {
-                this.clickMe().then((res) => {
-                    this.add();
-                    console.log("res", res)
-                })
-            },
-            async clickMe() {
-                console.log("你点到我了")
-                let userMsg = await this.getUserMsg();
-                console.log("this.userMsg", userMsg)
-            },
             getUserMsg() {
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        console.log("我发起请求了")
-                        this.$axios.post('/api/user/info', {
-                            token: this.token
-                        })
-                        .then((res) => {
-                            let { nickname } = res.data.data;
-                            console.log("name",res,nickname)
-                        })
-                    }, 800)
-                })
-            },
-            getUserMsg2() {
                 console.log("我发起请求了2",this)
                 this.$post('/api/user/info', {token: this.token})
                 .then((res) => {
-                    console.log("name",res)
+                    let { nickname } = res.data;
+                    console.log("name",res,nickname)
                 })
             },
             add() {
                 this.price = 10.00;
+                // 查找某个特定属性
+                var result = this.list.some(item=>{
+                    if(item.id === 1){
+                        console.log(item.name);
+                    }
+                })
             },
             delete() {
                 console.log("delete")
             }
         },
         mounted() {
-            
+
         },
         computed: {
             totlePriceWithTax() {

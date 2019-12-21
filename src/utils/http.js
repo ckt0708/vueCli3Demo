@@ -22,7 +22,9 @@ axios.interceptors.request.use(
           'Content-Type': 'application/x-www-form-urlencoded' //设置header覆盖content-type
         }
         Toast.loading({
-            forbidClick: true
+            type:"loading",
+            forbidClick: true,
+            loadingType:"spinner",
         })
         return request
     },
@@ -35,8 +37,8 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         Toast.clear()
-        const res = response.data
-        if (res.status && res.status !== 200) {
+        const res = response
+        if (res.code && res.code !== 0) {
             // 登录超时,重新登录
             if (res.status === 401) {
             //   store.dispatch('FedLogOut').then(() => {

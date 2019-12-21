@@ -15,7 +15,12 @@ export default {
         sortList,
         "van-number-keyboard": NumberKeyboard
     },
-    created() {}
+    created() {
+        
+    },
+    methods: {
+        
+    },
 };
 </script>
 

@@ -65,7 +65,7 @@ export default {
                 Notify({ type: 'danger', message: '请输入正确的密码' });
                 return;
             }
-            this.$axios.post('/api/login/index',{
+            this.$post('/api/login/index',{
                 phone:phoneNum,
                 password:password
             })
