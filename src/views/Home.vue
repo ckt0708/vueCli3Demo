@@ -6,7 +6,7 @@
         <div>总价：¥{{price*quantity}}</div>
         <div>折扣后：¥{{totlePriceWithTax}}</div>
         <p class="click" @click="add()">点我有惊喜哦</p>
-        <p class="click" @click="getUserMsg2()">获取用户信息</p>
+        <p class="click" @click="getUserMsg()">获取用户信息</p>
     </div>
 </template>
 
